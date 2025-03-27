@@ -1,0 +1,19 @@
+On branch teo-branch
+Your branch is up to date with 'origin/teo-branch'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   src/PIC4rl_gym/gazebo_sim/launch/simulation.launch.py
+	modified:   src/PIC4rl_gym/gazebo_sim/worlds/empty.world
+	modified:   src/PIC4rl_gym/pic4rl/config/main_params.yaml
+	modified:   src/PIC4rl_gym/pic4rl/pic4rl/tasks/goToPose/pic4rl_environment_lidar.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	src/PIC4rl_gym/gazebo_sim/worlds/tiny.world
+	src/PIC4rl_gym/pic4rl/goals_and_poses/training/empty.json
+	src/PIC4rl_gym/pic4rl/goals_and_poses/training/tiny.json
+	../src_backup/
+
+no changes added to commit (use "git add" and/or "git commit -a")

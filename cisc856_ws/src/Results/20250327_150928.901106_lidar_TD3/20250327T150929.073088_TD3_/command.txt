@@ -1,0 +1,1 @@
+/home/rl/Documents/cisc856_slam_rl/cisc856_ws/install/pic4rl/lib/pic4rl/go_to_pose_lidar --ros-args -r __node:=pic4rl_starter --params-file /tmp/launch_params_bqzdt29n --params-file /tmp/launch_params_ohzv0p0y --params-file /tmp/launch_params_ba2i1l55 --params-file /tmp/launch_params_8ah_hwt2
