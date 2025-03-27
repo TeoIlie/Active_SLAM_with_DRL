@@ -1,0 +1,6 @@
+numpy==1.26.4
+tensorflow==2.10.0
+tensorflow-addons==0.20.0
+tensorflow-estimator==2.10.0
+tensorflow-io-gcs-filesystem==0.37.1
+tensorflow-probability==0.18.0
