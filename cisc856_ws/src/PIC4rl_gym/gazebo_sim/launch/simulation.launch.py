@@ -75,7 +75,7 @@ def generate_launch_description():
     gazebo = launch.actions.ExecuteProcess(
         cmd=['gazebo','--verbose', world_path, '-s','libgazebo_ros_init.so','-s','libgazebo_ros_factory.so'],
         output='screen'
-        )
+        ) # set cmd=['gzserver',... for headless
     
     return launch.LaunchDescription([
         use_sim_time_arg,

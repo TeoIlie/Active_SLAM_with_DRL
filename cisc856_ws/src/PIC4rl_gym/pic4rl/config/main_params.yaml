@@ -4,7 +4,7 @@ main_node:
     mode: "training" # Training or testing
     # Robot parameters
     robot_name: "jackal_ugv" # robot entity name in gazebo
-    max_lin_vel: 0.5
+    max_lin_vel: 2.0
     min_lin_vel: 0.0
     max_ang_vel: 1.0
     min_ang_vel: -1.0
@@ -16,11 +16,11 @@ main_node:
     goal_tolerance: 0.40
 
     # World parameters
-    world_name: "new_indoor.world" # Leave empty to obtain no world
-    data_path: "training/new_indoor.json" # Indicate a goals and poses json file from goals_and_poses folder
+    world_name: "tiny.world" # Leave empty to obtain no world
+    data_path: "training/tiny.json" # Indicate a goals and poses json file from goals_and_poses folder
 
     # Task parameters
-    task: 'goToPose' # goToPose, Following, Vineyards
+    task: 'Mapping_ours' # goToPose, Following, Vineyards
     
     # Sensors parameters
     update_frequency: 15.0
@@ -32,12 +32,18 @@ main_node:
     camera_enabled: "false"
     stereo_camera_enabled: "false"
     lidar_enabled: "true"
+
+    ####
+    map_enabled: "true"  # for mapping
+    ####
+
     sensors_topic:
       rgb_topic: "/camera_color/image_raw"
       depth_topic: "/camera_stereo/depth/image_raw" # "/camera_stereo/depth/image_raw" 
       laser_topic: "/scan" # /scan or /front/scan
       imu_topic: "/imu/data" #imu_data or /imu/data
       odom_topic: "/odom" # /odom or /jackal/ground_truth
+      map_topic: "/map" ####
     laser_param:
       max_distance: 10.0 # Meters
       num_points: 36 # int divider of 360

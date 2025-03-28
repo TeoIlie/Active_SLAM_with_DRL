@@ -12,6 +12,7 @@ from ament_index_python.packages import get_package_share_directory
 from sensor_msgs.msg import LaserScan
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Image, Imu
+from nav_msgs.msg import OccupancyGrid ### for mapping
 
 from cv_bridge import CvBridge
 
@@ -257,18 +258,25 @@ class Sensors:
         self.depth_data = None
         self.rgb_data = None
         self.imu_data = None
+        ####
+        self.map_data = None
+        ####
 
         self.imu_sub = None
         self.depth_sub = None
         self.rgb_sub = None
         self.laser_sub = None
         self.odom_sub = None
+        ####
+        self.map_sub = None
+        ####
 
         self.imu_process = None
         self.depth_process = None
         self.rgb_process = None
         self.laser_process = None
         self.odom_process = None
+
         self.node = node
         self.sensor_msg = {}
         self.sensors = self.activate_sensors()
@@ -327,6 +335,18 @@ class Sensors:
             )
             self.sensor_msg["scan"] = "None"
 
+        ####
+        if self.param["map_enabled"] == "true":
+            self.node.get_logger().debug("Map subscription done")
+            self.laser_sub = self.node.create_subscription(
+                OccupancyGrid,
+                self.param["sensors_topic"]["map_topic"],
+                self.map_cb,
+                1,
+            )
+            self.sensor_msg["map"] = "None" 
+        ####
+
         self.node.get_logger().debug("Odometry subscription done")
         self.odom_sub = self.node.create_subscription(
             Odometry, self.param["sensors_topic"]["odom_topic"], self.odometry_cb, 1
@@ -353,6 +373,12 @@ class Sensors:
     def odometry_cb(self, msg):
         self.odom_data = msg
         self.sensor_msg["odom"] = msg
+
+    ####
+    def map_cb(self, msg):
+        self.map_data = msg
+        self.sensor_msg["map"] = msg
+    ####
 
     def get_odom(self, vel=False):
         if self.odom_sub is None:
@@ -413,3 +439,14 @@ class Sensors:
         if min_obstacle_distance:
             return processed_data, min_obstacle_distance_v, collision
         return processed_data, collision
+    
+    ####
+    def get_map(self):
+        if self.map_sub is None:
+            self.node.get_logger().warn("NO map subscription")
+            return None
+        if self.map_data is None:
+            self.node.get_logger().warn("NO map data")
+            return None
+        return self.map_data
+    ####

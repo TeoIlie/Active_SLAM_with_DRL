@@ -42,6 +42,11 @@ install(PROGRAMS
 )
 
 install(PROGRAMS
+  scripts/mapping_ours_lidar
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(PROGRAMS
   pic4rl/plot_reward.py
   DESTINATION lib/${PROJECT_NAME}
 )

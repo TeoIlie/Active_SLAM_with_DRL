@@ -73,7 +73,8 @@ class OnPolicyTrainer(Trainer):
         episode_start_time = time.time()
         total_steps = np.array(0, dtype=np.int32)
         n_episode = 0
-        obs = self._env.reset(n_episode)
+        # obs = self._env.reset(n_episode)
+        obs = self._env.reset(n_episode, total_steps)
 
         tf.summary.experimental.set_step(total_steps)
         while total_steps < self._max_steps:
@@ -107,7 +108,8 @@ class OnPolicyTrainer(Trainer):
                     tf.summary.experimental.set_step(total_steps)
                     self.finish_horizon()
                     n_episode += 1
-                    obs = self._env.reset(n_episode)
+                    # obs = self._env.reset(n_episode)
+                    obs = self._env.reset(n_episode, total_steps)
                     fps = episode_steps / (time.time() - episode_start_time)
                     self.logger.info(
                         "Total Epi: {0: 5} Steps: {1: 7} Episode Steps: {2: 5} Return: {3: 5.4f} FPS: {4:5.2f}".format(
@@ -205,7 +207,7 @@ class OnPolicyTrainer(Trainer):
         for i in range(self._test_episodes):
             episode_return = 0.
             frames = []
-            obs = self._test_env.reset(n_episode=1001)
+            obs = self._test_env.reset(n_episode=1001, tot_steps=total_steps)
             avg_test_steps += 1
             for _ in range(self._episode_max_steps):
                 if self._normalize_obs:

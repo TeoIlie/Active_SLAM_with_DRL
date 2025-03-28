@@ -15,7 +15,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>50 50</size>
             </plane>
           </geometry>
           <surface>
@@ -41,7 +41,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>50 50</size>
             </plane>
           </geometry>
           <material>
@@ -134,7 +134,7 @@
           <pose>0 0 0.25 0 -0 0</pose>
           <geometry>
             <box>
-              <size>20 0.25 2</size>
+              <size>10 0.25 2</size>
             </box>
           </geometry>
           <material>
@@ -176,7 +176,7 @@
           <pose>0 0 0.25 0 -0 0</pose>
           <geometry>
             <box>
-              <size>20 0.25 2</size>
+              <size>10 0.25 2</size>
             </box>
           </geometry>
           <material>

@@ -309,6 +309,7 @@ class Trainer:
                                    else args.max_steps)
         self._n_experiments = args.n_experiments
         self._show_progress = args.show_progress
+        print("self.show_progress", self._show_progress)
         self._save_model_interval = args.save_model_interval
         self._save_summary_interval = args.save_summary_interval
         self._normalize_obs = args.normalize_obs
