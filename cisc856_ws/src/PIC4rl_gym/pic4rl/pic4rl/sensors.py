@@ -159,6 +159,26 @@ class OdomSensor:
 
         else:
             return [pos_x, pos_y, zr]
+        
+###
+class MapSensor:
+    def __init__(self):
+        pass
+
+    def process_data(self, data):
+
+        width = data.info.width
+        height = data.info.height
+
+        # Convert 1D data array to 2D NumPy array
+        data = np.array(data.data, dtype=np.int8)  # int8 to handle -1
+        occupancy_grid = data.reshape((height, width))  # Row-major order
+
+        occupancy_grid = np.where(occupancy_grid == -1, 50, occupancy_grid)
+        occupancy_grid = occupancy_grid/100
+
+        return occupancy_grid
+###
 
 
 class DepthCamera:
@@ -338,12 +358,13 @@ class Sensors:
         ####
         if self.param["map_enabled"] == "true":
             self.node.get_logger().debug("Map subscription done")
-            self.laser_sub = self.node.create_subscription(
+            self.map_sub = self.node.create_subscription(
                 OccupancyGrid,
                 self.param["sensors_topic"]["map_topic"],
                 self.map_cb,
                 1,
             )
+            self.map_process = MapSensor()
             self.sensor_msg["map"] = "None" 
         ####
 
@@ -448,5 +469,6 @@ class Sensors:
         if self.map_data is None:
             self.node.get_logger().warn("NO map data")
             return None
-        return self.map_data
+        processed_data = self.map_process.process_data(self.map_data)
+        return processed_data
     ####

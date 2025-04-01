@@ -25,7 +25,7 @@ training_params:
     --n-step: 4 # (int) Number of steps for nstep experience reward. The default is ``4``
     # --rb-path-save: '' # Save experience replay buffer in case of save
     # --rb-path-load: 'src/Results/<name_of_the_model_to_restore>' # Load experience replay buffer in case of restore
-    --logging-level: INFO # (DEBUG, INFO, WARNING) Choose logging level. The default is ``INFO``
+    --logging-level: DEBUG # (DEBUG, INFO, WARNING) Choose logging level. The default is ``INFO``
     --policy: 'PPO' # training policy
     --policy_trainer: 'on-policy' # trainer off-policy / on-policy
     --change_goal_and_pose: 3

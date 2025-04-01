@@ -33,7 +33,7 @@ from tf2rl.algos.sac_ae import SACAE
 from tf2rl.algos.ppo import PPO
 from tf2rl.experiments.trainer import Trainer
 from tf2rl.experiments.on_policy_trainer import OnPolicyTrainer
-from pic4rl.tasks.goToPose.pic4rl_environment_lidar import Pic4rlEnvironmentLidar
+from pic4rl.tasks.Mapping_ours.pic4rl_mapping_environment_lidar import Pic4rlEnvironmentLidar
 from ament_index_python.packages import get_package_share_directory
 
 from rclpy.executors import SingleThreadedExecutor

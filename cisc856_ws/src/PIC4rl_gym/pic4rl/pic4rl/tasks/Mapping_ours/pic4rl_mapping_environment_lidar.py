@@ -156,6 +156,7 @@ class Pic4rlEnvironmentLidar(Node):
             goal_info,
             robot_pose,
             collision,
+            og_map
         ) = self.get_sensor_data()
 
         if not reset_step:
@@ -168,7 +169,7 @@ class Pic4rlEnvironmentLidar(Node):
             )
             self.get_logger().debug("getting reward...")
             reward = self.get_reward(
-                twist, lidar_measurements, goal_info, robot_pose, done, event
+                twist, lidar_measurements, goal_info, robot_pose, done, event, og_map
             )
 
             self.get_logger().debug("getting observation...")
@@ -220,9 +221,11 @@ class Pic4rlEnvironmentLidar(Node):
 
     def get_sensor_data(self):
         """ """
+
         sensor_data = {}
         sensor_data["scan"], collision = self.sensors.get_laser()
         sensor_data["odom"] = self.sensors.get_odom(vel=False)
+        sensor_data["map"] = self.sensors.get_map()
 
         if sensor_data["scan"] is None:
             sensor_data["scan"] = (
@@ -233,8 +236,9 @@ class Pic4rlEnvironmentLidar(Node):
 
         goal_info, robot_pose = process_odom(self.goal_pose, sensor_data["odom"])
         lidar_measurements = sensor_data["scan"]
+        og_map = sensor_data["map"]
 
-        return lidar_measurements, goal_info, robot_pose, collision
+        return lidar_measurements, goal_info, robot_pose, collision, og_map
 
     def check_events(self, lidar_measurements, goal_info, robot_pose, collision):
         """ """
@@ -270,18 +274,24 @@ class Pic4rlEnvironmentLidar(Node):
 
         return False, "None"
 
-    def get_reward(self, twist, lidar_measurements, goal_info, robot_pose, done, event):
+    def get_reward(self, twist, lidar_measurements, goal_info, robot_pose, done, event, og_map):
         """ """
-        reward = (self.previous_goal_info[0] - goal_info[0]) * 30
-        yaw_reward = (1 - 2 * math.sqrt(math.fabs(goal_info[1] / math.pi))) * 0.6
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!og_map", og_map)
 
-        reward += yaw_reward
+        #calculate reward using entropy of occupancy map
 
-        if event == "goal":
-            reward += 1000
-        elif event == "collision":
-            reward += -200
-        self.get_logger().debug(str(reward))
+        sum_entropy = 0
+        og_map = og_map.flatten()
+        for grid in og_map:
+            if grid == 0 or grid == 1:
+                sum_entropy += 0
+            elif grid == 0.5:
+                sum_entropy += 1
+        
+
+        reward = sum_entropy
+
+        #TODO calc info gain by takin diff of entropies over time steps
 
         return reward
 
