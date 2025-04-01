@@ -158,6 +158,8 @@ class Pic4rlEnvironmentLidar(Node):
             collision,
         ) = self.get_sensor_data()
 
+        print("!!!!collision:", collision)
+
         if not reset_step:
             if self.mode == "testing":
                 self.nav_metrics.get_metrics_data(lidar_measurements, self.episode_step)
@@ -166,6 +168,9 @@ class Pic4rlEnvironmentLidar(Node):
             done, event = self.check_events(
                 lidar_measurements, goal_info, robot_pose, collision
             )
+
+            print("!!!!!!!!!!!!!done:", done)
+
             self.get_logger().debug("getting reward...")
             reward = self.get_reward(
                 twist, lidar_measurements, goal_info, robot_pose, done, event
@@ -194,13 +199,13 @@ class Pic4rlEnvironmentLidar(Node):
     def spin_sensors_callbacks(self):
         """ """
         self.get_logger().debug("spinning node...")
-        rclpy.spin_once(self, timeout_sec=1.0) # added timeout_sec to prevent stuck, for now
-        # rclpy.spin_once(self)
+        # rclpy.spin_once(self, timeout_sec=1.0) # added timeout_sec to prevent stuck, for now
+        rclpy.spin_once(self)
         while None in self.sensors.sensor_msg.values():
             empty_measurements = [ k for k, v in self.sensors.sensor_msg.items() if v is None]
             self.get_logger().debug(f"empty_measurements: {empty_measurements}")
-            rclpy.spin_once(self, timeout_sec=1.0)
-            # rclpy.spin_once(self)
+            # rclpy.spin_once(self, timeout_sec=1.0)
+            rclpy.spin_once(self)
             self.get_logger().debug("spin once ...")
         self.sensors.sensor_msg = dict.fromkeys(self.sensors.sensor_msg.keys(), None)
 
@@ -240,7 +245,8 @@ class Pic4rlEnvironmentLidar(Node):
         """ """
         if collision:
             self.collision_count += 1
-            if self.collision_count >= 3:
+            print(f"!!!!!!!!!!!!!\ncollision{collision}\nself.col_count{self.collision_count}")
+            if self.collision_count >= 1:
                 self.collision_count = 0
                 self.get_logger().info(
                     f"Ep {'evaluate' if self.evaluate else self.episode+1}: Collision"
@@ -305,6 +311,7 @@ class Pic4rlEnvironmentLidar(Node):
 
     def reset(self, n_episode, tot_steps, evaluate=False):
         """ """
+        print("!!!RESET!!!")
         if self.mode == "testing":
             self.nav_metrics.calc_metrics(n_episode, self.initial_pose, self.goal_pose)
             self.nav_metrics.log_metrics_results(n_episode)
@@ -323,7 +330,8 @@ class Pic4rlEnvironmentLidar(Node):
         self.episode_step = 0
 
         _, _, _ = self._step(reset_step=True)
-        observation, _, _ = self._step()
+        observation, _, done_flag = self._step()
+        print("DONE !!!!",done_flag)
 
         return observation
 

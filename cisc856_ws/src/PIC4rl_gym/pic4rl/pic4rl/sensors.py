@@ -170,9 +170,10 @@ class MapSensor:
         width = data.info.width
         height = data.info.height
 
+        print(f"!!!!!!!!OG MAP: Width{width} Height {height} Size {width*height}")
+
         # Convert 1D data array to 2D NumPy array
-        data = np.array(data.data, dtype=np.int8)  # int8 to handle -1
-        occupancy_grid = data.reshape((height, width))  # Row-major order
+        occupancy_grid = np.array(data.data, dtype=np.int8)  # int8 to handle -1
 
         occupancy_grid = np.where(occupancy_grid == -1, 50, occupancy_grid)
         occupancy_grid = occupancy_grid/100

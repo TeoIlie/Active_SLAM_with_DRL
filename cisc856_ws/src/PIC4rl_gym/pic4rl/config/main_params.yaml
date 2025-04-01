@@ -1,7 +1,7 @@
 main_node:
   ros__parameters:
     # Mode
-    mode: "testing" # Training or testing
+    mode: "training" # Training or testing
     # Robot parameters
     robot_name: "jackal_ugv" # robot entity name in gazebo
     max_lin_vel: 2.0
@@ -16,14 +16,14 @@ main_node:
     goal_tolerance: 0.40
 
     # World parameters
-    world_name: "tiny.world" # Leave empty to obtain no world
-    data_path: "training/tiny.json" # Indicate a goals and poses json file from goals_and_poses folder
+    world_name: "new_indoor.world" # Leave empty to obtain no world
+    data_path: "training/new_indoor.json" # Indicate a goals and poses json file from goals_and_poses folder
 
     # Task parameters
-    task: 'Mapping_ours' # goToPose, Following, Vineyards
+    task: 'Mapping_ours' # goToPose, Following, Vineyards, Mapping_ours
     
     # Sensors parameters
-    update_frequency: 15.0
+    update_frequency: 15.0  
     sensor: 'lidar' # lidar or camera
     visual_data: 'features'
     features: 12544
