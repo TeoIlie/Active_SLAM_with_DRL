@@ -94,7 +94,7 @@ class OnPolicyTrainer(Trainer):
                     self._env.render()
 
                 episode_steps += 1
-                print(f"!!!!!!!!!!Total steps:{episode_steps}")
+                print(f"== Episode steps: {episode_steps}")
                 total_steps += 1
                 episode_return += reward
 

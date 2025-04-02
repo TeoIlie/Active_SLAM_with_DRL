@@ -29,6 +29,9 @@ class Pic4rlEnvironmentLidar(Node):
     def __init__(self):
         """ """
         super().__init__("pic4rl_training_lidar")
+
+        self.slam_proc = None
+
         self.declare_parameter("package_name", "pic4rl")
         self.declare_parameter("training_params_path", rclpy.Parameter.Type.STRING)
         self.declare_parameter("main_params_path", rclpy.Parameter.Type.STRING)
@@ -279,6 +282,11 @@ class Pic4rlEnvironmentLidar(Node):
 
     def get_reward(self, twist, lidar_measurements, goal_info, robot_pose, done, event, og_map):
         """ """
+        # hyperparams
+        info_gain_coeff = 0.001
+        collision_penalty = -100
+
+        # info gain
         total_known = 0
 
         for cell in og_map:
@@ -286,11 +294,25 @@ class Pic4rlEnvironmentLidar(Node):
                 total_known += 1
 
         info_gain = total_known - self.prev_known
-        print(f"!!!!!!!!!!!!!!! Total known:{total_known} Prev known:{self.prev_known}")
-        print(f"!!!!!!!!!!!!!!! Info gain:{info_gain}")
 
-        reward = info_gain
+        if info_gain >= 0:
+            print(f"Abdeali is happy!")
+        else:
+            print(f"\n\nAbdeali sad :(((\n\n")
+            info_gain = 0 #TODO find why Abdeali gets sad
 
+        print(f"================ Total known:{total_known}, Prev known:{self.prev_known}")
+        print(f"================ Info gain:{info_gain}")
+
+        reward = info_gain * info_gain_coeff
+
+        # collision
+        collision = False
+        if event == "collision":
+            reward += collision_penalty
+            collision = True
+
+        print(f"================ Reward:{reward}, Collision:{collision}")
         return reward, total_known
 
     def get_observation(self, twist, lidar_measurements, goal_info, robot_pose):
@@ -337,12 +359,20 @@ class Pic4rlEnvironmentLidar(Node):
 
     def new_episode(self):
         """ """
+        print("\n\n\n======New Episode=======\n\n\n")
         self.get_logger().debug("Resetting simulation ...")
         req = Empty.Request()
 
         while not self.reset_world_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().warn("service not available, waiting again...")
         self.reset_world_client.call_async(req)
+
+        if self.slam_proc is not None:
+            self.slam_proc.terminate()
+            self.slam_proc.wait()
+        self.slam_proc = subprocess.Popen(['ros2', 'launch', 'slam_toolbox', 'online_async_launch.py'])
+
+        self.prev_known = 0
 
         if self.episode % self.change_episode == 0.0 or self.evaluate:
             self.index = int(np.random.uniform() * len(self.poses)) - 1
