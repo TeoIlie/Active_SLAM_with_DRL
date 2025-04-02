@@ -78,8 +78,10 @@ class OnPolicyTrainer(Trainer):
 
         tf.summary.experimental.set_step(total_steps)
         while total_steps < self._max_steps:
+            
             # Collect samples
             for _ in range(self._policy.horizon):
+                
                 if self._normalize_obs:
                     obs = self._obs_normalizer(obs, update=False)
                 act, logp, val = self._policy.get_action_and_val(obs)
@@ -92,6 +94,7 @@ class OnPolicyTrainer(Trainer):
                     self._env.render()
 
                 episode_steps += 1
+                print(f"!!!!!!!!!!Total steps:{episode_steps}")
                 total_steps += 1
                 episode_return += reward
 

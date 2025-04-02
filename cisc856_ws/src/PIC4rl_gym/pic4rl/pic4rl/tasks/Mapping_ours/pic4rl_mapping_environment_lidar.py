@@ -131,6 +131,7 @@ class Pic4rlEnvironmentLidar(Node):
         if self.mode == "testing":
             self.nav_metrics = Navigation_Metrics(self.logdir)
         self.get_logger().debug("PIC4RL_Environment: Starting process")
+        self.prev_known = 0
 
     def step(self, action, episode_step=0):
         """ """
@@ -168,9 +169,11 @@ class Pic4rlEnvironmentLidar(Node):
                 lidar_measurements, goal_info, robot_pose, collision
             )
             self.get_logger().debug("getting reward...")
-            reward = self.get_reward(
+            reward, curr_known = self.get_reward(
                 twist, lidar_measurements, goal_info, robot_pose, done, event, og_map
             )
+
+            self.prev_known = curr_known
 
             self.get_logger().debug("getting observation...")
             observation = self.get_observation(
@@ -195,13 +198,13 @@ class Pic4rlEnvironmentLidar(Node):
     def spin_sensors_callbacks(self):
         """ """
         self.get_logger().debug("spinning node...")
-        rclpy.spin_once(self, timeout_sec=1.0) # added timeout_sec to prevent stuck, for now
-        # rclpy.spin_once(self)
+        # rclpy.spin_once(self, timeout_sec=1.0) # added timeout_sec to prevent stuck, for now
+        rclpy.spin_once(self)
         while None in self.sensors.sensor_msg.values():
             empty_measurements = [ k for k, v in self.sensors.sensor_msg.items() if v is None]
             self.get_logger().debug(f"empty_measurements: {empty_measurements}")
-            rclpy.spin_once(self, timeout_sec=1.0)
-            # rclpy.spin_once(self)
+            # rclpy.spin_once(self, timeout_sec=1.0)
+            rclpy.spin_once(self)
             self.get_logger().debug("spin once ...")
         self.sensors.sensor_msg = dict.fromkeys(self.sensors.sensor_msg.keys(), None)
 
@@ -276,24 +279,19 @@ class Pic4rlEnvironmentLidar(Node):
 
     def get_reward(self, twist, lidar_measurements, goal_info, robot_pose, done, event, og_map):
         """ """
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!og_map", og_map)
+        total_known = 0
 
-        #calculate reward using entropy of occupancy map
+        for cell in og_map:
+            if cell == 0 or cell == 1:
+                total_known += 1
 
-        sum_entropy = 0
-        og_map = og_map.flatten()
-        for grid in og_map:
-            if grid == 0 or grid == 1:
-                sum_entropy += 0
-            elif grid == 0.5:
-                sum_entropy += 1
-        
+        info_gain = total_known - self.prev_known
+        print(f"!!!!!!!!!!!!!!! Total known:{total_known} Prev known:{self.prev_known}")
+        print(f"!!!!!!!!!!!!!!! Info gain:{info_gain}")
 
-        reward = sum_entropy
+        reward = info_gain
 
-        #TODO calc info gain by takin diff of entropies over time steps
-
-        return reward
+        return reward, total_known
 
     def get_observation(self, twist, lidar_measurements, goal_info, robot_pose):
         """ """
