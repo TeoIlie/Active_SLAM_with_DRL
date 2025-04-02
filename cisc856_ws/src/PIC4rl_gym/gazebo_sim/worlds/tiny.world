@@ -8,6 +8,13 @@
       </ros>
       <update_rate>1.0</update_rate>
     </plugin>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>0.114245 -3.45755 33.7709 0 1.5698 -0.010384</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
     <!-- Include ground plane and sun -->
     <include>
       <uri>model://ground_plane</uri>
@@ -20,19 +27,19 @@
     <!-- Wall 1 (front) -->
     <model name="wall_front">
       <static>true</static>
-      <pose>0 2.5 0.5 0 0 0</pose>
+      <pose>0 5 0.5 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>5 0.1 1</size>
+              <size>10 0.1 1</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>5 0.1 1</size>
+              <size>10 0.1 1</size>
             </box>
           </geometry>
         </visual>
@@ -42,19 +49,19 @@
     <!-- Wall 2 (back) -->
     <model name="wall_back">
       <static>true</static>
-      <pose>0 -2.5 0.5 0 0 0</pose>
+      <pose>0 -5 0.5 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>5 0.1 1</size>
+              <size>10 0.1 1</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>5 0.1 1</size>
+              <size>10 0.1 1</size>
             </box>
           </geometry>
         </visual>
@@ -64,19 +71,19 @@
     <!-- Wall 3 (left) -->
     <model name="wall_left">
       <static>true</static>
-      <pose>-2.5 0 0.5 0 0 0</pose>
+      <pose>-5 0 0.5 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>0.1 5 1</size>
+              <size>0.1 10 1</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>0.1 5 1</size>
+              <size>0.1 10 1</size>
             </box>
           </geometry>
         </visual>
@@ -86,23 +93,113 @@
     <!-- Wall 4 (right) -->
     <model name="wall_right">
       <static>true</static>
-      <pose>2.5 0 0.5 0 0 0</pose>
+      <pose>5 0 0.5 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>0.1 5 1</size>
+              <size>0.1 10 1</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>0.1 5 1</size>
+              <size>0.1 10 1</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
+
+    <!-- Square Box Walls -->
+    <!-- Wall 1 (front) -->
+    <model name="wall_front_2">
+      <static>true</static>
+      <pose>0 2 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>4 0.1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>4 0.1 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Wall 2 (back) -->
+    <model name="wall_back_2">
+      <static>true</static>
+      <pose>0 -2 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>4 0.1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>4 0.1 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Wall 3 (left) -->
+    <model name="wall_left_2">
+      <static>true</static>
+      <pose>-2 0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 4 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 4 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Wall 4 (right) -->
+    <model name="wall_right_2">
+      <static>true</static>
+      <pose>2 0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 4 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 4 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
   </world>
 </sdf>

@@ -4,10 +4,10 @@ main_node:
     mode: "training" # Training or testing
     # Robot parameters
     robot_name: "jackal_ugv" # robot entity name in gazebo
-    max_lin_vel: 2.0
+    max_lin_vel: 0.1
     min_lin_vel: 0.0
-    max_ang_vel: 1.0
-    min_ang_vel: -1.0
+    max_ang_vel: 0.2
+    min_ang_vel: -0.2
     robot_type: "rectangular" # rectangular or circular
     robot_radius: 0.3 # [m], If robot_type is cicrular
     robot_size: [0.508, 0.430] #[0.508, 0.430] # [m, m], Lenght, Width if robot_type is rectangular
@@ -16,8 +16,8 @@ main_node:
     goal_tolerance: 0.40
 
     # World parameters
-    world_name: "new_indoor.world" # Leave empty to obtain no world
-    data_path: "training/new_indoor.json" # Indicate a goals and poses json file from goals_and_poses folder
+    world_name: "tiny.world" # Leave empty to obtain no world
+    data_path: "training/tiny.json" # Indicate a goals and poses json file from goals_and_poses folder
 
     # Task parameters
     task: 'Mapping_ours' # goToPose, Following, Vineyards, Mapping_ours
