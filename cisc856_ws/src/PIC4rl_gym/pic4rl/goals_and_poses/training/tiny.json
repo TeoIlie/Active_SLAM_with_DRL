@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "initial_pose": [0.0, 3, 0.0],
+=======
+  "initial_pose": [0.0, 2.5, 0.0],
+>>>>>>> Stashed changes
   "goals": [
     [0.0, 0.0]
   ],

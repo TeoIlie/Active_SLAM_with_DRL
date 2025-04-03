@@ -1,11 +1,19 @@
 training_params:
 # Trainer parameters
     --max-steps: 1000000 # (int) The maximum steps for training. The default is ``int(1e6)``
+<<<<<<< Updated upstream
     --episode-max-steps: 600 # (int) The maximum steps for an episode. The default is ``int(1e3)``
     --n-experiments: 10 # (int) Number of experiments. The default is ``1``
     # --show-progress: True # Call ``render`` function during training
     --save-model-interval: 10000 # (int) Interval to save model. The default is ``int(1e4)``
     --save-summary-interval: 10000 # (int) Interval to save summary. The default is ``int(1e3)``
+=======
+    --episode-max-steps: 750 # (int) The maximum steps for an episode. The default is ``int(1e3)``
+    --n-experiments: 10 # (int) Number of experiments. The default is ``1``
+    # --show-progress: True # Call ``render`` function during training
+    --save-model-interval: 25 # (int) Interval to save model. The default is ``int(1e4)``
+    --save-summary-interval: 25 # (int) Interval to save summary. The default is ``int(1e3)``
+>>>>>>> Stashed changes
     --model-dir: 'src/Results'
     # --model-dir: 'src/PIC4rl_gym/pic4rl/trained_agents/covivio_SAC/20240123_121352.737161_camera_SAC_550k/20240123T121354.560252_SAC_' # (str) Directory to restore model.
 #    --dir-suffix: ""  # (str) Suffix for directory that stores results.
@@ -26,27 +34,47 @@ training_params:
     # --rb-path-save: '' # Save experience replay buffer in case of save
     # --rb-path-load: 'src/Results/<name_of_the_model_to_restore>' # Load experience replay buffer in case of restore
     --logging-level: DEBUG # (DEBUG, INFO, WARNING) Choose logging level. The default is ``INFO``
+<<<<<<< Updated upstream
     --policy: 'PPO' # training policy
     --policy_trainer: 'on-policy' # trainer off-policy / on-policy
+=======
+    --policy: 'SAC' # training policy
+    --policy_trainer: 'off-policy' # trainer off-policy / on-policy
+>>>>>>> Stashed changes
     --change_goal_and_pose: 3
     --starting_episodes: 0
     --batch-size: 32 # (int) Batch size for training. The default is ``32``.
     --gpu: 0 # (int) GPU id. ``-1`` disables GPU. The default is ``0``.
 
 # For all off-policy algos (DDPG, TD3, SAC)
+<<<<<<< Updated upstream
     --n-warmup: 15000 # (int) Number of warmup steps before training. The default is ``1e4``.
     # --memory-capacity: 200000  # (int) Replay Buffer size. The default is ``1e6``.
 
 # For only SAC
 #    --alpha: 0.2 # (float) Temperature parameter. The default is ``0.2``.
 #    --auto-alpha: # Automatic alpha tuning
+=======
+    --n-warmup: 10 # (int) Number of warmup steps before training. The default is ``1e4``.
+    --memory-capacity: 200000  # (int) Replay Buffer size. The default is ``1e6``.
+
+# For only SAC
+    --alpha: 0.2 # (float) Temperature parameter. The default is ``0.2``.
+    --auto-alpha: # Automatic alpha tuning
+>>>>>>> Stashed changes
 # For only SAC-AE
     # --stop-q-grad: # Whether stop gradient after convolutional layers at Encoder
 
 # For on-policy algorithms (PPO)
+<<<<<<< Updated upstream
     --horizon: 2048  # (int) The default is ``2048``.
     --normalize-adv: # Normalize Advantage. default True
     --enable-gae: # Enable GAE. Default True
+=======
+    # --horizon: 2048  # (int) The default is ``2048``.
+    # --normalize-adv: # Normalize Advantage. default True
+    # --enable-gae: # Enable GAE. Default True
+>>>>>>> Stashed changes
 
 # Testing with tflite models
     --tflite_flag: False

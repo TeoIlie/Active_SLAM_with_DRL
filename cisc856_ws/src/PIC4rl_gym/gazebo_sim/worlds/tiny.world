@@ -27,19 +27,31 @@
     <!-- Wall 1 (front) -->
     <model name="wall_front">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>0 5 0.5 0 0 0</pose>
+=======
+      <pose>0 3.75 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>10 0.1 1</size>
+=======
+              <size>7.5 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>10 0.1 1</size>
+=======
+              <size>7.5 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
@@ -49,19 +61,31 @@
     <!-- Wall 2 (back) -->
     <model name="wall_back">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>0 -5 0.5 0 0 0</pose>
+=======
+      <pose>0 -3.75 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>10 0.1 1</size>
+=======
+              <size>7.5 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>10 0.1 1</size>
+=======
+              <size>7.5 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
@@ -71,19 +95,31 @@
     <!-- Wall 3 (left) -->
     <model name="wall_left">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>-5 0 0.5 0 0 0</pose>
+=======
+      <pose>-3.75 0 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 10 1</size>
+=======
+              <size>0.1 7.5 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 10 1</size>
+=======
+              <size>0.1 7.5 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
@@ -93,19 +129,31 @@
     <!-- Wall 4 (right) -->
     <model name="wall_right">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>5 0 0.5 0 0 0</pose>
+=======
+      <pose>3.75 0 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 10 1</size>
+=======
+              <size>0.1 7.5 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 10 1</size>
+=======
+              <size>0.1 7.5 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
@@ -116,19 +164,31 @@
     <!-- Wall 1 (front) -->
     <model name="wall_front_2">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>0 2 0.5 0 0 0</pose>
+=======
+      <pose>0 1 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>4 0.1 1</size>
+=======
+              <size>2 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>4 0.1 1</size>
+=======
+              <size>2 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
@@ -138,19 +198,31 @@
     <!-- Wall 2 (back) -->
     <model name="wall_back_2">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>0 -2 0.5 0 0 0</pose>
+=======
+      <pose>0 -1 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>4 0.1 1</size>
+=======
+              <size>2 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>4 0.1 1</size>
+=======
+              <size>2 0.1 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
@@ -160,19 +232,31 @@
     <!-- Wall 3 (left) -->
     <model name="wall_left_2">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>-2 0 0.5 0 0 0</pose>
+=======
+      <pose>-1 0 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 4 1</size>
+=======
+              <size>0.1 2 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 4 1</size>
+=======
+              <size>0.1 2 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
@@ -182,19 +266,31 @@
     <!-- Wall 4 (right) -->
     <model name="wall_right_2">
       <static>true</static>
+<<<<<<< Updated upstream
       <pose>2 0 0.5 0 0 0</pose>
+=======
+      <pose>1 0 0.5 0 0 0</pose>
+>>>>>>> Stashed changes
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 4 1</size>
+=======
+              <size>0.1 2 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
+<<<<<<< Updated upstream
               <size>0.1 4 1</size>
+=======
+              <size>0.1 2 1</size>
+>>>>>>> Stashed changes
             </box>
           </geometry>
         </visual>
