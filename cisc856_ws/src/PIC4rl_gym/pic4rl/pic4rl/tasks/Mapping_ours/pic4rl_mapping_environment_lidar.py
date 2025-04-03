@@ -30,16 +30,12 @@ class Pic4rlEnvironmentLidar(Node):
         """ """
         super().__init__("pic4rl_training_lidar")
 
-<<<<<<< Updated upstream
-        self.slam_proc = None
-=======
 
         ########### Our parameters ##########
         self.slam_proc = None
         self.max_known = 20900
         #####################################
 
->>>>>>> Stashed changes
 
         self.declare_parameter("package_name", "pic4rl")
         self.declare_parameter("training_params_path", rclpy.Parameter.Type.STRING)
@@ -181,12 +177,6 @@ class Pic4rlEnvironmentLidar(Node):
                 lidar_measurements, goal_info, robot_pose, collision
             )
             self.get_logger().debug("getting reward...")
-<<<<<<< Updated upstream
-            reward, curr_known = self.get_reward(
-                twist, lidar_measurements, goal_info, robot_pose, done, event, og_map
-            )
-
-=======
             reward, curr_known, covered = self.get_reward(
                 twist, lidar_measurements, goal_info, robot_pose, done, event, og_map
             )
@@ -194,7 +184,6 @@ class Pic4rlEnvironmentLidar(Node):
             if covered:
                 done = True
 
->>>>>>> Stashed changes
             self.prev_known = curr_known
 
             self.get_logger().debug("getting observation...")
@@ -303,13 +292,9 @@ class Pic4rlEnvironmentLidar(Node):
         """ """
         # hyperparams
         info_gain_coeff = 0.001
-<<<<<<< Updated upstream
-        collision_penalty = -100
-=======
         collision_penalty = -20
         max_known_reward = 100
         covered = False
->>>>>>> Stashed changes
 
         # info gain
         total_known = 0
@@ -336,11 +321,6 @@ class Pic4rlEnvironmentLidar(Node):
         if event == "collision":
             reward += collision_penalty
             collision = True
-<<<<<<< Updated upstream
-
-        print(f"================ Reward:{reward}, Collision:{collision}")
-        return reward, total_known
-=======
         
         # coverage
         if total_known >= 0.9 * self.max_known:
@@ -349,7 +329,6 @@ class Pic4rlEnvironmentLidar(Node):
 
         print(f"================ Reward:{reward}, Collision:{collision}")
         return reward, total_known, covered
->>>>>>> Stashed changes
 
     def get_observation(self, twist, lidar_measurements, goal_info, robot_pose):
         """ """
@@ -404,11 +383,6 @@ class Pic4rlEnvironmentLidar(Node):
         self.reset_world_client.call_async(req)
 
         if self.slam_proc is not None:
-<<<<<<< Updated upstream
-            self.slam_proc.terminate()
-            self.slam_proc.wait()
-        self.slam_proc = subprocess.Popen(['ros2', 'launch', 'slam_toolbox', 'online_async_launch.py'])
-=======
             # self.slam_proc.terminate()
             self.get_logger().info("Killing any existing slam_toolbox processes...")
             subprocess.run(['pkill', '-f', 'slam_toolbox'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -419,7 +393,6 @@ class Pic4rlEnvironmentLidar(Node):
         self.slam_proc = subprocess.Popen(['ros2', 'launch', 'slam_toolbox', 'online_async_launch.py'], 
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE)
->>>>>>> Stashed changes
 
         self.prev_known = 0
 
