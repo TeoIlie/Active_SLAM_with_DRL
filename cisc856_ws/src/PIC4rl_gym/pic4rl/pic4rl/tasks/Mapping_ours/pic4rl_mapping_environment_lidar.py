@@ -291,7 +291,8 @@ class Pic4rlEnvironmentLidar(Node):
     def get_reward(self, twist, lidar_measurements, goal_info, robot_pose, done, event, og_map):
         """ """
         # hyperparams
-        info_gain_coeff = 0.001
+        info_gain_coeff = 1.5
+        info_gain_beta = 10
         collision_penalty = -20
         max_known_reward = 100
         covered = False
@@ -305,6 +306,13 @@ class Pic4rlEnvironmentLidar(Node):
 
         info_gain = total_known - self.prev_known
 
+        print(f"================ Raw Info Gain:{info_gain}")
+
+        info_gain = info_gain_coeff * np.emath.logn(10, 1.0 + info_gain_beta * info_gain)
+        # 1.5 * log_10(10x + 1) 
+
+        print(f"================ Info Gain reward:{info_gain}")
+
         if info_gain >= 0:
             print(f"Abdeali is happy!")
         else:
@@ -312,9 +320,8 @@ class Pic4rlEnvironmentLidar(Node):
             info_gain = 0 #TODO find why Abdeali gets sad
 
         print(f"================ Total known:{total_known}, Prev known:{self.prev_known}")
-        print(f"================ Info gain:{info_gain}")
 
-        reward = info_gain * info_gain_coeff
+        reward = info_gain
 
         # collision
         collision = False
@@ -323,7 +330,7 @@ class Pic4rlEnvironmentLidar(Node):
             collision = True
         
         # coverage
-        if total_known >= 0.9 * self.max_known:
+        if total_known >= 0.97 * self.max_known:
             reward += max_known_reward
             covered = True
 
