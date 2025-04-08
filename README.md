@@ -12,7 +12,7 @@
 3. optionally, adjust testing and training parameters in `cisc856_ws/src/PIC4rl_gym/pic4rl/config`
 3. run simulation launch files:
     - Gazebo launch file at `cisc856_ws/run_gazebo_sim.sh`
-    - PIC4rl launch file at `cisc856_ws/run_pic4rl_launch.sh`
+    - PIC4rl launch file at `cisc856_ws/run_pic4rl_launch.sh` - this also launches SLAM Toolbox  
 4. optionally, open Rviz and subscribe to the **map** topic to visualize the SLAM occupancy grid in real-time
 
 ## Changes Summary
