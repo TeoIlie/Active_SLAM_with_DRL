@@ -5,14 +5,14 @@
 
 ## Quick Start
 1. on Ubuntu 22.04, download required packages:
-  - [ROS2 Humble](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html)
-  - [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_ubuntu/) 
-  - [SLAM Toolbox](https://github.com/SteveMacenski/slam_toolbox?tab=readme-ov-file#install)
+    - [ROS2 Humble](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html)
+    - [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_ubuntu/) 
+    - [SLAM Toolbox](https://github.com/SteveMacenski/slam_toolbox?tab=readme-ov-file#install)
 2. clone this repo
 3. optionally, adjust testing and training parameters in `cisc856_ws/src/PIC4rl_gym/pic4rl/config`
 3. run simulation launch files:
-  - Gazebo launch file at `cisc856_ws/run_gazebo_sim.sh`
-  - PIC4rl launch file at `cisc856_ws/run_pic4rl_launch.sh`
+    - Gazebo launch file at `cisc856_ws/run_gazebo_sim.sh`
+    - PIC4rl launch file at `cisc856_ws/run_pic4rl_launch.sh`
 4. optionally, open Rviz and subscribe to the **map** topic to visualize the SLAM occupancy grid in real-time
 
 ## Changes Summary
