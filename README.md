@@ -1,7 +1,7 @@
 # Active Exploration in SLAM: a Deep Reinforcement Learning Approach
 
 ## Demo 🤖
-![SLAM RL Demo](https://raw.githubusercontent.com/kw908/cisc856_slam_rl/main/cisc856_ws/images/demo.gif)
+![map_image](/images/demo.gif?raw=true "Map Image")
 
 ## Quick Start
 1. on Ubuntu 22.04, download required packages:
