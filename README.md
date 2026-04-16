@@ -25,3 +25,6 @@
   - new world definition in `cisc856_ws/src/PIC4rl_gym/gazebo_sim/worlds/tiny.world`
   - new LiDAR sensor definition in `cisc856_ws/src/PIC4rl_gym/pic4rl/pic4rl/sensors.py`
 - training, testing video available [here](https://youtu.be/a0PUhAlBM3Q)
+
+## Report
+For a full project explanation, see the [Project Report](/Project_Report.pdf)
